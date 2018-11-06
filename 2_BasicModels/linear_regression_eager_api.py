@@ -37,3 +37,52 @@ def linear_regression(inputs):
 # Mean square error
 def mean_square_fn(model_fn, inputs, labels):
     return tf.reduce_sum(tf.pow(model_fn(inputs) - labels, 2)) / (2 * n_samples)
+
+# SGD Optimizer
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+# Compute gradients
+grad = tfe.implicit_gradients(mean_square_fn)
+
+# Initial cost before optimizing
+print("Initial cost= {:.9f}".format(
+    mean_square_fn(linear_regression, train_X, train_Y)),
+    "W=", W.numpy(), "b=", b.numpy())
+
+# Training
+for step in range(num_steps):
+    optimizer.apply_gradients(grad(linear_regression, train_X, train_Y))
+    if (step + 1) % display_step == 0 or step == 0:
+        print("Epoch:", '%04d' % (step + 1), "cost=",
+              "{:.9f}".format(mean_square_fn(linear_regression, train_X, train_Y)),
+              "W=", W.numpy(), "b=", b.numpy())
+
+# Graphic display
+plt.plot(train_X, train_Y, 'ro', label='Original data')
+plt.plot(train_X, np.array(W * train_X + b), label='Fitted line')
+plt.legend()
+plt.show()
+
+# Testing example
+test_X = np.asarray([6.83, 4.668, 8.9, 7.91, 5.7, 8.7, 3.1, 2.1])
+test_Y = np.asarray([1.84, 2.273, 3.2, 2.831, 2.92, 3.24, 1.35, 1.03])
+
+# print("Testing...(Mean squared loss comparison)")
+# # testing_cost = sess.run(tf.reduce_sum(
+# #     tf.pow(pred - Y, 2)) / (2 * test_X.shape[0]), feed_dict={X: test_X, Y: test_Y})
+# # print("Testing cost=", testing_cost)
+# # print("Absolute mean square loss difference:",
+# #         abs(training_cost - testing_cost))
+
+# print("Initial cost= {:.9f}".format(
+#     mean_square_fn(linear_regression, test_X, test_Y)),
+#     "W=", W.numpy(), "b=", b.numpy())
+
+# plt.plot(test_X, test_Y, "bo", label="Testing Data")
+# plt.plot(train_X, sess.run(W) * train_X + sess.run(b), label="Fitted line")
+# plt.legend()
+# plt.show()
+# plt.plot(train_X, train_Y, 'ro', label='Original data')
+# plt.plot(train_X, np.array(W * train_X + b), label='Fitted line')
+# plt.legend()
+# plt.show()
+    
