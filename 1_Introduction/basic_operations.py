@@ -1,3 +1,8 @@
+# Just disables the warning, doesn't enable AVX/FMA
+# https://stackoverflow.com/questions/47068709/your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-u
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 import tensorflow as tf
 
 # Basic 
