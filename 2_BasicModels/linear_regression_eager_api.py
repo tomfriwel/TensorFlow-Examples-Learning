@@ -66,23 +66,24 @@ plt.show()
 test_X = np.asarray([6.83, 4.668, 8.9, 7.91, 5.7, 8.7, 3.1, 2.1])
 test_Y = np.asarray([1.84, 2.273, 3.2, 2.831, 2.92, 3.24, 1.35, 1.03])
 
-# print("Testing...(Mean squared loss comparison)")
-# # testing_cost = sess.run(tf.reduce_sum(
-# #     tf.pow(pred - Y, 2)) / (2 * test_X.shape[0]), feed_dict={X: test_X, Y: test_Y})
-# # print("Testing cost=", testing_cost)
-# # print("Absolute mean square loss difference:",
-# #         abs(training_cost - testing_cost))
+print("Testing...(Mean squared loss comparison)")
+# testing_cost = sess.run(tf.reduce_sum(
+#     tf.pow(pred - Y, 2)) / (2 * test_X.shape[0]), feed_dict={X: test_X, Y: test_Y})
+# print("Testing cost=", testing_cost)
+# print("Absolute mean square loss difference:",
+#         abs(training_cost - testing_cost))
 
-# print("Initial cost= {:.9f}".format(
-#     mean_square_fn(linear_regression, test_X, test_Y)),
-#     "W=", W.numpy(), "b=", b.numpy())
+print("Initial cost= {:.9f}".format(
+    mean_square_fn(linear_regression, test_X, test_Y)),
+    "W=", W.numpy(), "b=", b.numpy())
 
 # plt.plot(test_X, test_Y, "bo", label="Testing Data")
 # plt.plot(train_X, sess.run(W) * train_X + sess.run(b), label="Fitted line")
 # plt.legend()
 # plt.show()
-# plt.plot(train_X, train_Y, 'ro', label='Original data')
-# plt.plot(train_X, np.array(W * train_X + b), label='Fitted line')
-# plt.legend()
-# plt.show()
+
+plt.plot(test_X, test_Y, 'bo', label='Testing data')
+plt.plot(test_X, np.array(W * test_X + b), label='Fitted line')
+plt.legend()
+plt.show()
     
