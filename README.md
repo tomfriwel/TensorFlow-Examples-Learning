@@ -11,3 +11,5 @@ The fetches argument may be a single graph element, or an arbitrarily nested lis
 ```
 
 `tf.Session().run`'s first parameter may take a graph element. I think the graph element is just like a mathematical formula.
+
+`tf.placeholder` just like a variable in mathematical formula.
